@@ -9,5 +9,11 @@ export default defineNuxtConfig({
   //   'publi/css/colors.css',
   //   '/css/styles.css'
   // ],
-  
+  ssr: true,
+  runtimeConfig: {
+    public: {
+      apiBaseClient: process.env.API_BASE_CLIENT || 'http://imaster.local:80', // browser/client
+    },
+    apiBase: process.env.API_BASE || 'http://laravel.test:80', // server/SSR
+  }
 })

@@ -348,6 +348,11 @@
   </div>
 </template>
 <script setup>
+useHead({
+  bodyAttrs: {
+    class: 'green-theme'
+  }
+})
 onMounted(() => {
   const loadStyle = (href) => {
     return new Promise((resolve, reject) => {

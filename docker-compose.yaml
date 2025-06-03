@@ -11,6 +11,10 @@ services:
     tty: true
     stdin_open: true
     command: tail -f /dev/null
+    networks:
+      - sail
 networks:
   sail:
-    driver: bridge
+    external: true
+    name: imaster_sail
+
