@@ -180,9 +180,9 @@
 	});
 
 	
-	$(document).ready(function() {
-	  $('select').niceSelect();
-	});
+	// $(document).ready(function() {
+	//   $('select').niceSelect();
+	// });
 	
 	// Brand Slide
 	$('#brand-slide').slick({

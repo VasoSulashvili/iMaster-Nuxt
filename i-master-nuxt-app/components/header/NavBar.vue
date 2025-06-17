@@ -31,9 +31,12 @@
 					</ul>
 					
 					<ul class="nav-menu nav-menu-social align-to-right">
-						<li>
+						<PluginsAuthGuest v-if="!isAuthenticated" />
+						<PluginsAuthUser v-if="isAuthenticated"  />
+						
+						<!-- <li>
 							<a href="JavaScript:Void(0);" data-bs-toggle="modal" data-bs-target="#login"><i class="fas fa-sign-in-alt me-2"></i>Sign In</a>
-						</li>
+						</li> -->
 						<li class="list-buttons ms-2">
 							<a href="signup.html"><i class="fa-solid fa-cloud-arrow-up me-2"></i>Upload Resume</a>
 						</li>
@@ -44,3 +47,6 @@
 	</div>
 	<!-- End Navigation -->
 </template>
+<script setup>
+	const { isAuthenticated, user } = useSanctumAuth();
+</script>

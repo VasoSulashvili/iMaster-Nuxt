@@ -35,17 +35,32 @@
 	</div>			
 </template>
 <script setup>
+	const apiBase = useApiBase();
 	const nuxtApp = useNuxtApp()
-	const { data: faqs, error} = await useFetch('http://laravel.test/ka/api/faqs', {
-		key: 'faqs',
-		getCachedData(key) {
-			return nuxtApp.payload.data[key] || nuxtApp.static.data[key]
-		},
-		default: () => ({
-			data: []
-		}),
-		onError(error) {
-			console.error('Error fetching FAQs:', error)
+	const { data: faqs, pending, error } = await useAsyncData(
+		'faqs', 
+		() => $fetch(`${apiBase}/ka/api/faqs`),
+		{
+			getCachedData(key) {
+				return nuxtApp.payload.data[key] || nuxtApp.static.data[key]
+			},
+			default: () => ({
+				data: []
+			}),
 		}
-	})
+	);
+	// const { data: faqs } = await useAsyncData('faqs', () => $fetch('/api/faqs'));
+	// const { data: faqs, error} = await useFetch('http://laravel.test/ka/api/faqs', {
+	// 	key: 'faqs',
+	// 	getCachedData(key) {
+	// 		return nuxtApp.payload.data[key] || nuxtApp.static.data[key]
+	// 	},
+	// 	default: () => ({
+	// 		data: []
+	// 	}),
+	// 	onError(error) {
+	// 		console.error('Error fetching FAQs:', error)
+	// 	}
+	// })
 </script>
+

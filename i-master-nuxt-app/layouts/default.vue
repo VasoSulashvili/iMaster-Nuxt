@@ -14,7 +14,7 @@
 
     <Footer />
     <!-- Log In Modal -->
-    <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="loginmodal" aria-hidden="true">
+    <!-- <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="loginmodal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered login-pop-form" role="document">
             <div class="modal-content" id="loginmodal">
                 <span class="mod-close" data-bs-dismiss="modal" aria-hidden="true"><i class="fas fa-close"></i></span>
@@ -65,7 +65,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- End Modal -->
     
     <!-- Filter Modal -->
