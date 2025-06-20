@@ -1,6 +1,6 @@
 export const useApiBase = () => {
   const config = useRuntimeConfig();
-  const baseUrl = process.client
+  const baseUrl = import.meta.client
     ? config.public.apiBaseUrlBrowser
     : config.apiBaseUrlServer;
 

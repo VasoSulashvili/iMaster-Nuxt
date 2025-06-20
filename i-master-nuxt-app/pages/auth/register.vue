@@ -29,6 +29,7 @@
 	});
 	import { ref } from 'vue';
 	import { toast } from 'vue3-toastify';
+	const apiBase = useApiBase();
 	const { login } = useSanctumAuth();
 	const router = useRouter()
 
@@ -40,7 +41,7 @@
 
 	async function signUp() {
 
-		const { data: data, error } = await useFetch('http://imaster.local/ka/api/iAuth/register', {
+		const { data: data, error } = await useFetch(apiBase + '/ka/api/iAuth/register', {
 			method: 'post',
 			body: credentials.value
 		})

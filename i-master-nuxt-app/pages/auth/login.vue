@@ -33,7 +33,6 @@
 		middleware: ['sanctum:guest'],
 	});
 	import { ref } from 'vue';
-	import { toast } from 'vue3-toastify';
 	const { login } = useSanctumAuth();
 	const router = useRouter()
 

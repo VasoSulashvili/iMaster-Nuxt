@@ -56,8 +56,8 @@
     import { toast } from 'vue3-toastify';
     import { ref, onMounted } from 'vue';
 
+    const apiBase = apiBase();
     const user = useSanctumUser();
-
     const pin = ref('');
     const type = ref(null);
 
@@ -68,7 +68,7 @@
 
     async function sendPin() {
         
-        const { data, error } = await useSanctumFetch('http://imaster.local/ka/api/iAuth/otp/send', {
+        const { data, error } = await useSanctumFetch(apiBase + '/ka/api/iAuth/otp/send', {
             method: 'POST',
             body: {
                 type: type.value,
@@ -84,7 +84,7 @@
 
     async function update2FA() {
 
-            const { data, error } = await useSanctumFetch('http://imaster.local/ka/api/iAuth/2fa/update', {
+            const { data, error } = await useSanctumFetch(apiBase + '/ka/api/iAuth/2fa/update', {
                 method: 'POST',
                 body: {
                     type: type.value,

@@ -34,6 +34,7 @@
 	});
 	import { ref } from 'vue';
 	import { toast } from 'vue3-toastify';
+	const apiBase = useApiBase();
 	const { isAuthenticated, user, error  } = useSanctumAuth();
 	const router = useRouter()
 
@@ -50,7 +51,7 @@
 
 	const sendPin = async () => {
 
-        const { data, error } = await useSanctumFetch('http://imaster.local/ka/api/iAuth/otp/send', {
+        const { data, error } = await useSanctumFetch(apiBase + '/ka/api/iAuth/otp/send', {
         method: 'POST',
         body: {
 			type: type.value
@@ -67,7 +68,7 @@
 
 	const submitPin = async () => {
 
-        const { data, error } = await useSanctumFetch('http://imaster.local/ka/api/iAuth/2fa/login', {
+        const { data, error } = await useSanctumFetch(apiBase + '/ka/api/iAuth/2fa/login', {
         method: 'POST',
         body: {
 			pin: pin.value

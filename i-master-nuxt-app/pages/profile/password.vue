@@ -39,6 +39,7 @@
 
     import { toast } from 'vue3-toastify';
     import { ref } from 'vue';
+    const apiBase = useApiBase();
 
     const formData = ref({
         current_password: '',
@@ -48,7 +49,7 @@
 
     async function updatePassword() {
         console.log('Updating password with data:', formData.value);
-        const { data, error } = await useSanctumFetch('http://imaster.local/ka/api/iAuth/password/update', {
+        const { data, error } = await useSanctumFetch(apiBase + '/ka/api/iAuth/password/update', {
         method: 'POST',
         body: formData.value,
         });
