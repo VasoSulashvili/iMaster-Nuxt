@@ -46,7 +46,9 @@
                             <li :class="{'active': route.path === '/profile/password'}">
                               <NuxtLink to="/profile/password"><i class="fas fa-key me-2"></i>Pasword</NuxtLink>
                             </li>
-                            <li><NuxtLink to="/profile/two-fa"><i class="fas fa-qrcode me-2"></i>2 FA</NuxtLink></li>
+                            <li :class="{'active': route.path === '/profile/two-fa'}">
+                              <NuxtLink to="/profile/two-fa"><i class="fas fa-qrcode me-2"></i>2 FA</NuxtLink>
+                            </li>
                             <!-- <li class="active"><a href="candidate-profile.html"><i class="fa-regular fa-user me-2"></i>My Profile </a></li>
                             <li><a href="candidate-resume.html"><i class="fa-solid fa-file-pdf me-2"></i>My Resumes</a></li>
                             <li><a href="candidate-applied-jobs.html"><i class="fa-regular fa-paper-plane me-2"></i>Applied jobs</a></li>
@@ -76,52 +78,53 @@
   </div>
 </template>
 <script setup>
-import { useRoute } from 'vue-router'
-const route = useRoute()
-useHead({
-  bodyAttrs: {
-    class: 'green-theme'
-  }
-})
-onMounted(() => {
-  const loadStyle = (href) => {
-    return new Promise((resolve, reject) => {
-      const link = document.createElement('link')
-      link.rel = 'stylesheet'
-      link.href = href
-      link.onload = resolve
-      link.onerror = reject
-      document.head.appendChild(link)
-    })
-  }
 
-  const loadScript = (src) => {
-    return new Promise((resolve, reject) => {
-      const script = document.createElement('script')
-      script.src = src
-      script.async = false
-      script.onload = resolve
-      script.onerror = reject
-      document.body.appendChild(script)
-    })
-  }
+  import { useRoute } from 'vue-router'
+  const route = useRoute()
+  useHead({
+    bodyAttrs: {
+      class: 'green-theme'
+    }
+  })
+  onMounted(() => {
+    const loadStyle = (href) => {
+      return new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = href
+        link.onload = resolve
+        link.onerror = reject
+        document.head.appendChild(link)
+      })
+    }
 
-  const loadAssets = async () => {
-    // Load CSS first
-    await loadStyle('/css/colors.css')
-    await loadStyle('/css/styles.css')
+    const loadScript = (src) => {
+      return new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = src
+        script.async = false
+        script.onload = resolve
+        script.onerror = reject
+        document.body.appendChild(script)
+      })
+    }
 
-    // Then load JS in order
-    await loadScript('/js/jquery.min.js')
-    await loadScript('/js/popper.min.js')
-    await loadScript('/js/bootstrap.min.js')
-    await loadScript('/js/rangeslider.js')
-    await loadScript('/js/jquery.nice-select.min.js')
-    await loadScript('/js/slick.js')
-    await loadScript('/js/counterup.min.js')
-    await loadScript('/js/custom.js')
-  }
+    const loadAssets = async () => {
+      // Load CSS first
+      await loadStyle('/css/colors.css')
+      await loadStyle('/css/styles.css')
 
-  loadAssets()
-})
+      // Then load JS in order
+      await loadScript('/js/jquery.min.js')
+      await loadScript('/js/popper.min.js')
+      await loadScript('/js/bootstrap.min.js')
+      await loadScript('/js/rangeslider.js')
+      await loadScript('/js/jquery.nice-select.min.js')
+      await loadScript('/js/slick.js')
+      await loadScript('/js/counterup.min.js')
+      await loadScript('/js/custom.js')
+    }
+
+    loadAssets()
+  })
 </script>

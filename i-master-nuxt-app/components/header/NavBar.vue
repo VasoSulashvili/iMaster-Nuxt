@@ -31,7 +31,8 @@
 					</ul>
 					
 					<ul class="nav-menu nav-menu-social align-to-right">
-						<PluginsAuthGuest v-if="!isAuthenticated" />
+						<li v-if="!isAuthenticated"><NuxtLink to="/auth/login"><i class="fas fa-sign-in-alt me-2"></i>Sign In</NuxtLink></li>
+						<!-- <PluginsAuthGuest v-if="!isAuthenticated" /> -->
 						<PluginsAuthUser v-if="isAuthenticated"  />
 						
 						<!-- <li>

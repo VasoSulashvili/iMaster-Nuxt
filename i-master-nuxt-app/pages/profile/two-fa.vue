@@ -52,34 +52,25 @@
     definePageMeta({
         layout: 'profile'
     })
+    import { toast } from 'vue3-toastify';
+    import { ref, onMounted } from 'vue';
 
     const user = useSanctumUser();
 
-    import { toast } from 'vue3-toastify';
-    import { ref } from 'vue';
-
-    const type = ref('');
-    const otpable_type = 'person';
-    const otpable_id = ref(user.value.data.id);
     const pin = ref('');
-    
+    const type = ref(null);
+
+    onMounted(() => {
+        type.value = user.value.data.two_fa_type;
+    });
+
 
     async function sendPin() {
         
-        if (type.value == 'email') {
-            var address = user.value.data.email;
-        }
-        if (type.value == 'sms') {
-            var address = user.value.data.sms;
-        }
-
         const { data, error } = await useSanctumFetch('http://imaster.local/ka/api/iAuth/otp/send', {
             method: 'POST',
             body: {
                 type: type.value,
-                otpable_type: otpable_type,
-                otpable_id: otpable_id.value,
-                address: address,
             },
         });
 
@@ -91,50 +82,24 @@
     }
 
     async function update2FA() {
-        console.log('Updating 2FA with data:', {
-            type: type.value,
-            otpable_type: otpable_type,
-            otpable_id: otpable_id.value,
-            pin: pin.value
-        });
 
-        const { data, error } = await useSanctumFetch('http://imaster.local/ka/api/iAuth/2fa/toggle', {
-            method: 'POST',
-            body: {
-                type: type.value,
-                otpable_type: otpable_type,
-                otpable_id: otpable_id.value,
-                pin: pin.value
-            },
-        });
+            const { data, error } = await useSanctumFetch('http://imaster.local/ka/api/iAuth/2fa/update', {
+                method: 'POST',
+                body: {
+                    type: type.value,
+                    pin: pin.value
+                },
+            });
 
-        if (error.value) {
-            toast.error('Operation failed!');
-        } else {
-            toast.success('2FA updated successfully!');
-            // Reset form fields if needed
-            type.value = '';
-            pin.value = '';
-        }
+            if (error.value) {
+                toast.error(error.value.data.message);
+            } else {
+                toast.success('2FA updated successfully!');
+                type.value = '';
+                pin.value = '';
+            }
+        
     }
 
-    // async function updatePassword() {
-    //     console.log('Updating password with data:', formData.value);
-    //     const { data, error } = await useSanctumFetch('http://imaster.local/ka/api/iAuth/password/update', {
-    //     method: 'POST',
-    //     body: formData.value,
-    //     });
-
-    //     if (error.value) {
-    //         toast.error('Operation failed!');
-    //     } else {
-    //         toast.success('Password updated successfully!');
-    //         formData.value = {
-    //             current_password: '',
-    //             password: '',
-    //             password_confirmation: ''
-    //         };
-    //     }
-    // }
 
 </script>
