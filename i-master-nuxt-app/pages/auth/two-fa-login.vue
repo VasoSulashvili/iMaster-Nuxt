@@ -29,6 +29,9 @@
 	</div>			
 </template>
 <script setup>
+	definePageMeta({
+		middleware: ['sanctum:auth'],
+	});
 	import { ref } from 'vue';
 	import { toast } from 'vue3-toastify';
 	const { isAuthenticated, user, error  } = useSanctumAuth();

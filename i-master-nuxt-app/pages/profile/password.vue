@@ -33,7 +33,8 @@
 </template>
 <script setup>
     definePageMeta({
-        layout: 'profile'
+        layout: 'profile',
+        middleware: ['sanctum:auth'],
     })
 
     import { toast } from 'vue3-toastify';

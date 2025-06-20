@@ -30,8 +30,13 @@ export default defineNuxtConfig({
       user: "/ka/api/iAuth/me",
       login: "/ka/api/iAuth/login",
       logout: "/ka/api/iAuth/logout",
-    }
+    },
+      redirect: {
+      keepRequestedRoute: true,
+      onAuthOnly: "/auth/login"
+    },
   },
+  
   router: {
     linkActiveClass: 'active',
   }
